@@ -16,6 +16,8 @@ function App() {
       duration: 1.2,
       smoothWheel: true,
     });
+    
+    (window as any).lenis = lenis;
 
     lenis.on("scroll", ScrollTrigger.update);
 

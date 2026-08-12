@@ -6,20 +6,21 @@ import {
   SiTailwindcss,
   SiSass,
   SiGreensock,
-  SiFramer,
   SiGit,
   SiVercel,
   SiStrapi,
 } from "react-icons/si";
 import { TbApi } from "react-icons/tb";
+import { SiFramer } from "react-icons/si";
 import type { IconType } from "react-icons";
 
-// Types
+//  Projects
 export type Project = {
   title: string;
   description: string;
   tech: string[];
-  link?: string;
+  image: string;
+  link: string;
 };
 
 export type SkillItem = {
@@ -82,38 +83,55 @@ export const skills: Skill[] = [
     ],
   },
 ];
-//  Projects
+
 export const projects: Project[] = [
   {
-    title: "RealCore Solutions",
+    title: "MM Computers",
     description:
-      "Large multilingual (EN/AR/UR) corporate website with RTL support, dynamic careers module, and CMS-driven content.",
-    tech: ["Next.js", "TypeScript", "Tailwind", "next-intl", "Strapi"],
-    link: "https://realcoresolutions.com",
-  },
-  {
-    title: "FinCodev",
-    description:
-      "Fintech-style marketing website with GSAP scroll animations, secure contact form, and smooth micro-interactions.",
-    tech: ["Next.js", "GSAP", "Tailwind", "Nodemailer"],
-    link: "",
-  },
-  {
-    title: "Silicon IT Solutions",
-    description:
-      "Fast, SEO-friendly static business website with Meta Pixel integration and aggressive mobile speed optimization.",
+      "My personal e-commerce style website for a computer hardware business.",
     tech: ["HTML", "CSS", "JavaScript"],
-    link: "",
+    image: "/projects/project1.png",
+    link: "https://mmcomputers.pk/",
   },
   {
-    title: "iaximo CRM",
+    title: "Sheryians Task 1",
     description:
-      "Role-based CRM admin panel deployed on a Linux VPS with CI/CD, SSL, and permission-based access control.",
-    tech: ["Laravel", "Filament", "MySQL", "Nginx"],
-    link: "",
+      "A responsive landing page built as part of the Sheryians coding challenge.",
+    tech: ["HTML", "CSS", "JavaScript"],
+    image: "/projects/project2.png",
+    link: "https://task1sheryians.netlify.app/",
+  },
+  {
+    title: "Animated Landing",
+    description:
+      "An animation-focused landing page exploring smooth interactions.",
+    tech: ["HTML", "CSS", "GSAP"],
+    image: "/projects/project3.png",
+    link: "https://grand-squirrel-fd525f.netlify.app/",
+  },
+  {
+    title: "Creative Page",
+    description: "A modern, creative web page with clean layout and motion.",
+    tech: ["HTML", "CSS", "JavaScript"],
+    image: "/projects/project4.png",
+    link: "https://jolly-capybara-5d3724.netlify.app/",
+  },
+  {
+    title: "UI Concept",
+    description: "A polished UI concept focusing on layout and responsiveness.",
+    tech: ["HTML", "CSS", "JavaScript"],
+    image: "/projects/project5.png",
+    link: "https://wonderful-paletas-b50dd2.netlify.app/",
+  },
+  {
+    title: "Interactive Web",
+    description:
+      "An interactive web page experimenting with modern web techniques.",
+    tech: ["HTML", "CSS", "JavaScript"],
+    image: "/projects/project6.png",
+    link: "https://poetic-macaron-7a25e0.netlify.app/",
   },
 ];
-
 //  Experience
 export const experience: ExperienceItem[] = [
   {

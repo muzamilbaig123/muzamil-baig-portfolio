@@ -29,7 +29,7 @@ export default function Experience() {
       id="experience"
       className="mx-auto max-w-4xl px-6 py-32 md:px-16"
     >
-      <h2 className="mb-16 text-sm uppercase tracking-widest text-neutral-500">
+      <h2 className="mb-16 text-sm uppercase tracking-widest text-white">
         Experience
       </h2>
 

@@ -57,13 +57,13 @@ export default function Hero() {
 
           <h1 className="text-5xl font-semibold leading-[1.02] tracking-tight text-white md:text-7xl lg:text-8xl">
             {personal.name.split(" ").map((word, i) => (
-              <span key={i} className="block overflow-hidden pb-2">
+              <span key={i} className="mr-4 inline-block overflow-hidden pb-2">
                 <span className="hero-word inline-block">{word}</span>
               </span>
             ))}
           </h1>
 
-          <p className="hero-tagline mt-8 max-w-md text-lg leading-relaxed text-white">
+          <p className="hero-tagline mt-8 max-w-lg text-lg leading-relaxed text-white">
             {personal.tagline}
           </p>
 

@@ -30,7 +30,7 @@ export default function Contact() {
       id="contact"
       className="mx-auto max-w-4xl px-6 py-32 text-center md:px-16"
     >
-      <h2 className="contact-reveal mb-6 text-sm uppercase tracking-widest text-neutral-500">
+      <h2 className="contact-reveal mb-6 text-sm uppercase tracking-widest text-white">
         Contact
       </h2>
 
@@ -39,7 +39,7 @@ export default function Contact() {
       </p>
       <a
         href={`mailto:${personal.email}`}
-        className="contact-reveal group mt-8 inline-flex items-center gap-3 text-lg text-neutral-400 transition-colors hover:text-white"
+        className="contact-reveal group mt-8 inline-flex items-center gap-3 text-lg text-white transition-colors hover:text-white"
       >
         <FiMail className="text-xl" />
         {personal.email}
@@ -68,7 +68,7 @@ export default function Contact() {
         </a>
       </div>
 
-      <p className="contact-reveal mt-24 text-sm text-neutral-600">
+      <p className="contact-reveal mt-24 text-sm text-white">
         © {new Date().getFullYear()} {personal.name}. Built with React & GSAP.
       </p>
     </section>
