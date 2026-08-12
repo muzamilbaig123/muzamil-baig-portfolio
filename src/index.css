@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+.hero-cta {
+  opacity: 0;
+}
