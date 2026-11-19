@@ -39,11 +39,13 @@ export default function HeroVisual() {
 
       <div className="absolute h-[68%] w-[68%] rounded-full border border-neutral-800" />
 
-      <div className="flex h-[52%] w-[52%] items-center justify-center rounded-full border border-neutral-700 bg-neutral-900/40 backdrop-blur-sm">
-        <span className="text-3xl font-semibold tracking-tight text-white">
-          {initials}
-        </span>
-      </div>
+  <div className="flex h-[52%] w-[52%] items-center justify-center overflow-hidden rounded-full border border-neutral-700 bg-neutral-900/40 backdrop-blur-sm">
+  <img
+    src="/profile.jpeg"
+    alt="Muzamil Baig"
+    className="h-full w-full object-cover"
+  />
+</div>
     </div>
   );
 }

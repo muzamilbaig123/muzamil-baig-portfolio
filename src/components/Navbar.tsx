@@ -1,7 +1,8 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "../lib/gsap";
 import { personal } from "../data/content";
+import { btnSecondary, btnSm } from "../styles/ui";
 
 const links = [
   { label: "About", href: "#about" },
@@ -13,6 +14,15 @@ const links = [
 
 export default function Navbar() {
   const navRef = useRef(null);
+
+  // Scroll hone pe navbar ke peeche halka blur background, taake content ke upar text saaf parha jaye
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -34,22 +44,24 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header ref={navRef} className="fixed top-0 left-0 z-50 w-full">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 md:px-16">
-        <a href="#home" className="nav-item opacity-0">
-          <img
-            src="/logo.png"
-            alt="Muzamil Baig logo"
-            className="h-20 w-auto"
-          />
+    <header
+      ref={navRef}
+      className={`fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,backdrop-filter] duration-300 ${
+        scrolled ? "border-white/6 bg-neutral-950/75 backdrop-blur-md" : "border-transparent"
+      }`}
+    >
+      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3 md:px-12">
+        <a href="#home" className="nav-item rounded-lg opacity-0" aria-label="Back to top">
+          <img src="/logo.png" alt="Muzamil Baig logo" className="h-14 w-auto md:h-16" />
         </a>
 
         <ul className="hidden items-center gap-8 md:flex">
           {links.map((link) => (
             <li key={link.href}>
+              {/* after: = neeche patli line jo hover pe left se phailti hai */}
               <a
                 href={link.href}
-                className="nav-item opacity-0 text-sm text-neutral-400 transition-colors hover:text-white"
+                className="nav-item relative py-1 text-sm text-neutral-400 opacity-0 transition-colors duration-200 after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-left after:scale-x-0 after:bg-white after:transition-transform after:duration-300 hover:text-white hover:after:scale-x-100"
               >
                 {link.label}
               </a>
@@ -61,7 +73,7 @@ export default function Navbar() {
           href={personal.github}
           target="_blank"
           rel="noopener noreferrer"
-          className="nav-item opacity-0 rounded-full border border-neutral-700 px-4 py-2 text-sm text-white transition hover:border-neutral-400"
+          className={`nav-item opacity-0 ${btnSecondary} ${btnSm} md:h-9 md:px-4 md:text-sm`}
         >
           GitHub
         </a>

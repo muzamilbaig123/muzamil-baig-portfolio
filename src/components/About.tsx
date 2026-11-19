@@ -2,6 +2,8 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "../lib/gsap";
 import { personal } from "../data/content";
+import SectionHeader from "./SectionHeader";
+import { section } from "../styles/ui";
 
 export default function About() {
   const container = useRef<HTMLElement>(null);
@@ -35,16 +37,10 @@ export default function About() {
   );
 
   return (
-    <section
-      ref={container}
-      id="about"
-      className="mx-auto max-w-4xl px-6 py-32 md:px-16"
-    >
-      <h2 className="about-heading mb-8 text-sm uppercase tracking-widest text-white">
-        About
-      </h2>
+    <section ref={container} id="about" className={section}>
+      <SectionHeader eyebrow="About" className="about-heading mb-8! md:mb-10!" />
 
-      <p className="about-text text-2xl leading-relaxed text-neutral-200 md:text-4xl md:leading-relaxed">
+      <p className="about-text max-w-4xl text-2xl leading-snug tracking-tight text-neutral-100 sm:text-3xl md:text-4xl md:leading-[1.3]">
         {personal.about.split(" ").map((word, i) => (
           <span key={i} className="about-word inline-block opacity-20">
             {word}&nbsp;

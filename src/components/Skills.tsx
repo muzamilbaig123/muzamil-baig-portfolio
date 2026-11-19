@@ -1,13 +1,24 @@
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
-import { gsap } from "../lib/gsap";
-import { skills } from "../data/content";
+import { gsap, ScrollTrigger } from "../lib/gsap";
+import { fetchSkills } from "../api/portfolio";
+import { useFetch } from "../hooks/useFetch";
+import SectionStatus from "./SectionStatus";
+import SectionHeader from "./SectionHeader";
+import { SkillsSkeleton } from "./Skeletons";
+import { section } from "../styles/ui";
 
 export default function Skills() {
   const container = useRef<HTMLElement>(null);
 
+  // Skills API se (GET /api/skills), category ke hisaab se grouped
+  const { data: skills, loading, error, reload } = useFetch(fetchSkills);
+
   useGSAP(
     () => {
+      // Data aane se pehle cards DOM me hain hi nahi, to animation ka faida nahi
+      if (!skills) return;
+
       gsap.from(".skill-heading", {
         y: 30,
         opacity: 0,
@@ -34,41 +45,46 @@ export default function Skills() {
           }
         );
       });
+
+      // Section ki height badal gayi, saare scroll triggers ki positions update karo
+      ScrollTrigger.refresh();
     },
-    { scope: container }
+    // dependencies: skills aane pe animation dobara set ho
+    // revertOnUpdate: purani animations hata ke nayi lagao
+    { scope: container, dependencies: [skills], revertOnUpdate: true }
   );
 
   return (
-    <section
-      ref={container}
-      id="skills"
-      className="mx-auto max-w-6xl px-6 py-32 md:px-16"
-    >
-      <div className="skill-heading mb-16">
-        <p className="mb-3 text-sm uppercase tracking-widest text-white">
-          Skills
-        </p>
-        <h2 className="text-3xl font-semibold text-white md:text-5xl">
-          Technologies I work with
-        </h2>
-      </div>
+    <section ref={container} id="skills" className={section}>
+      <SectionHeader eyebrow="Skills" title="Technologies I work with" className="skill-heading" />
 
-      <div className="space-y-16">
-        {skills.map((group) => (
+      <SectionStatus
+        loading={loading}
+        error={error}
+        isEmpty={skills?.length === 0}
+        emptyText="No skills added yet."
+        onRetry={reload}
+        skeleton={<SkillsSkeleton />}
+        label="skills"
+      />
+
+      <div className="space-y-12 md:space-y-14">
+        {skills?.map((group) => (
           <div key={group.category} className="skill-group">
-            <h3 className="mb-6 text-sm font-medium uppercase tracking-wider text-neutral-500">
+            <h3 className="mb-5 text-xs font-medium uppercase tracking-[0.2em] text-neutral-500 md:mb-6">
               {group.category}
             </h3>
-            <div className="skill-grid grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+            <div className="skill-grid grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
               {group.items.map((item) => (
-                <div
-                  key={item.name}
-                  className="skill-card group flex flex-col items-start gap-4 rounded-2xl border border-neutral-800 bg-neutral-900/30 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-neutral-600 hover:bg-neutral-900/60"
-                >
-                  <item.icon className="text-3xl text-neutral-400 transition-colors duration-300 group-hover:text-white" />
-                  <span className="text-base font-medium text-neutral-300">
-                    {item.name}
-                  </span>
+                // .skill-card ko GSAP animate karta hai (inline transform lagata hai),
+                // isliye hover lift andar wale div pe hai, warna hover kaam nahi karta
+                <div key={item.id} className="skill-card">
+                  <div className="group flex h-full flex-col items-start gap-4 rounded-2xl border border-neutral-800 bg-neutral-900/30 p-5 transition duration-300 ease-out hover:-translate-y-1 hover:border-neutral-600 hover:bg-neutral-900/60 md:p-6">
+                    <item.icon className="text-3xl text-neutral-400 transition-colors duration-300 group-hover:text-white" aria-hidden />
+                    <span className="text-sm font-medium text-neutral-300 transition-colors duration-300 group-hover:text-white md:text-base">
+                      {item.name}
+                    </span>
+                  </div>
                 </div>
               ))}
             </div>
