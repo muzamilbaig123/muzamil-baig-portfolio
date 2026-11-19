@@ -19,7 +19,7 @@ export function setToken(token: string): void {
 export function clearToken(): void {
   try {
     localStorage.removeItem(TOKEN_KEY);
-  } catch {}
+  } catch { /* ignore */ }
 }
 
 export function isLoggedIn(): boolean {

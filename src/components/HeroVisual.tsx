@@ -1,6 +1,5 @@
 import { useGSAP } from "@gsap/react";
 import { gsap } from "../lib/gsap";
-import { personal } from "../data/content";
 
 export default function HeroVisual() {
   useGSAP(() => {
@@ -11,11 +10,6 @@ export default function HeroVisual() {
       ease: "none",
     });
   });
-
-  const initials = personal.name
-    .split(" ")
-    .map((w) => w[0])
-    .join("");
 
   const circleText = "FRONTEND DEVELOPER · CREATIVE · ";
 
